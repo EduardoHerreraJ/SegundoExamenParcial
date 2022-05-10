@@ -26,11 +26,13 @@ public class CuentaService {
 
     public void retirar(int index, double monto){
         Cuenta cuenta = cuentaRepository.obtenerCuentaPorIndice(index);
-        double currentBalance = cuenta.getMonto();
-        double balanceAfterWithdraw = currentBalance - monto;
-        if(balanceAfterWithdraw < 0)
+        double montoActual = cuenta.getMonto();
+        double nuevoMonto = montoActual - monto;
+        if(nuevoMonto < 0)
             System.out.println("No se puede retirar esa cantidad");
-        cuentaRepository.actualizarMontoDeCuenta(index, balanceAfterWithdraw);
+        else{
+            cuentaRepository.actualizarMontoDeCuenta(index, nuevoMonto);
+        }
     }
 
     public Cuenta agregarCuenta(String nombre, String banco, String numeroCuenta){
@@ -54,8 +56,9 @@ public class CuentaService {
         return cuentaRepository.countCuentas();
     }
 
-    public List<Cuenta> getCuentas(){
+    public String[] getCuentas(){
         return cuentaRepository.getCuentas();
     }
+
 
 }

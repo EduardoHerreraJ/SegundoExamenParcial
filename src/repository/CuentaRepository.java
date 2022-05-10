@@ -21,8 +21,13 @@ public class CuentaRepository {
         return instance;
     }
 
-    public List<Cuenta> getCuentas(){
-        return cuentas;
+    public String[] getCuentas(){
+        int cuentasCount = countCuentas();
+        String[] cuentasArray = new String[cuentasCount];
+        for(int i = 0; i<cuentasCount; i++){
+            cuentasArray[i]=(cuentas.get(i).getNumeroDeCuenta());
+        }
+        return cuentasArray;
     }
     
 
